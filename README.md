@@ -5,8 +5,24 @@ https://www.youtube.com/watch?v=Ej_02ICOIgs&t=327s
 ## Object Oriented Programming:
 
 ### Encapsulation:
-Hiding information and restricting direct access to some of the 
-attributes.
+Hiding data and restricting direct access to some of the object
+attributes. The idea is to protect information by applying 
+indirect changes to data attributes using methods if necessary.
+
+### Abstraction:
+Hiding internal implementation details and unnecessary information
+from the instances by making methods private. This can be done by
+adding double underscores \_\_ in front of a variable name.
+
+### Inheritance:
+The procedure in which one class inherits the attributes and methods
+of another class. This allow us to reuse codes across all classes.
+
+### Polymorphism:
+Refers to the use of a single type entity to represent different types
+in different scenarios. For example, the len() function in python 
+behaves differently when given different data types (objects).
+This is polymorphism in action.
 
 ## Python Syntax
 Class method is used to create objects with similar attributes
@@ -44,3 +60,6 @@ This decorator is used to declare read-only attribute.
 ### @name.setter
 Decorator used to set read-only attribute specified by property
 decorator.
+
+### self.\_\_class\_\_.\_\_name\_\_
+Access the class name from an object instance.

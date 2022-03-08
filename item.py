@@ -1,44 +1,58 @@
 import csv
 
 class Item:
-    discountRate = 0.8
-    allItems = []
+    # Declare class variables
+    discount_rate = 0.8
+    all = []
+
     def __init__(self, name: str, price: float, quantity=0):
         # Run validations on received arguments
         assert price >= 0, f"Price {price} is less than 0"
         assert quantity >= 0, f"Quantity {quantity} is less than 0"
 
-        # Assign arguments to self object
+        # Assign arguments to self object (__ to make it private)
         self.__name = name
-        self.price = price
-        self.quantity = quantity
+        self.__price = price
+        self.__quantity = quantity
 
-        # Actions to execute
-        Item.allItems.append(self)
+        # Actions to execute when creating an instance
+        # Add to the object lists
+        Item.all.append(self)
 
     @property
-    # Property Decorator to create read-only attribute
+    # Property Decorator to create read-only attribute (encapsulation)
     def name(self):
         return self.__name
 
     @name.setter
-    # Change value of the read-only attribute
+    # Change value of the read-only attribute (encapsulation)
     def name(self, value):
-        self.__name = value
+        if len(value) > 10:
+            raise Exception("Name is too long!")
+        else:
+            self.__name = value
 
-    def calculateTotalPrice(self):
-        return self.price * self.quantity
+    @property
+    def price(self):
+        return self.__price
 
-    def applyDiscount(self):
-        return self.price * self.discountRate
+    def apply_increment(self, incrementValue):
+        self.__price += self.__price * incrementValue
 
+    def calculate_total_price(self):
+        return self.__price * self.__quantity
+
+    def apply_discount(self):
+        return self.__price * self.discount_rate
+
+    # Change the representation of an object instance (instead of displaying memory address)
     def __repr__(self):
-        return f"{self.__class__.__name__}('{self.name}', {self.price}, {self.quantity})"
+        return f"{self.__class__.__name__}('{self.name}', {self.__price}, {self.__quantity})"
 
     @classmethod
-    # Create instance on items listed in the csv file
-    def instantiateFromCSV(cls):
-        with open("items.csv", "r") as f:
+    # Create instances on items listed in the csv file
+    def instantiate_from_csv(cls, csv_file_name):
+        with open(csv_file_name, "r") as f:
             reader = csv.DictReader(f)
             items = list(reader)
 
